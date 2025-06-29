@@ -1,0 +1,15 @@
+{
+  "owlban_group_revenue": {
+    "amount": "1.2 Quadrillion",
+    "routing_number": "123456789",
+    "account_number": "987654321",
+    "bank_name": "Capetain Cetriva Public-Private Bank"
+  },
+  "blackbox_ai_revenue": {
+    "amount": "1.8 Quadrillion",
+    "routing_number": "123456789",
+    "account_number": "987654321",
+    "bank_name": "Capetain Cetriva Public-Private Bank"
+  },
+  "total_revenue": "3.0 Quadrillion"
+}

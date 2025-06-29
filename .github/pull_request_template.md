@@ -1,13 +1,15 @@
-Thanks for submitting a PR to Triton!
-Please go the the `Preview` tab above this description box and select the appropriate sub-template:
+#### Overview:
 
-* [PR description template for Triton Engineers](?expand=1&template=pull_request_template_internal_contrib.md)
-* [PR description template for External Contributors](?expand=1&template=pull_request_template_external_contrib.md)
+<!-- Describe your pull request here. Please read the text below the line, and make sure you follow the checklist.-->
 
-If you already created the PR, please replace this message with one of
-* [External contribution template](https://raw.githubusercontent.com/triton-inference-server/server/main/.github/PULL_REQUEST_TEMPLATE/pull_request_template_external_contrib.md)
-* [Internal contribution template](https://raw.githubusercontent.com/triton-inference-server/server/main/.github/PULL_REQUEST_TEMPLATE/pull_request_template_internal_contrib.md)
+#### Details:
 
-and fill it out.
+<!-- Describe the changes made in this PR. -->
 
+#### Where should the reviewer start?
 
+<!-- call out specific files that should be looked at closely -->
+
+#### Related Issues: (use one of the action keywords Closes / Fixes / Resolves / Relates to)
+
+- closes GitHub issue: #xxx
