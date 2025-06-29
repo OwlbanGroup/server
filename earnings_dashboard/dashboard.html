@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OWLban Earnings Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="https://alcdn.msauth.net/browser/2.28.1/js/msal-browser.min.js"></script>
+</head>
+<body>
+  <h1>OWLban Earnings Dashboard</h1>
+  <button id="loginBtn">Login with Microsoft</button>
+  <button id="logoutBtn" class="hidden">Logout</button>
+  <div id="userInfo" class="user-info"></div>
+  <div id="earnings"></div>
+  <script>
+    const msalConfig = {
+      auth: {
+        clientId: "YOUR_CLIENT_ID", // Replace with your Azure AD app client ID
+        authority: "https://login.microsoftonline.com/common",
+        redirectUri: window.location.origin
+      }
+    };
+    const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userInfoDiv = document.getElementById("userInfo");
+
+    loginBtn.onclick = async () => {
+      try {
+        const loginResponse = await msalInstance.loginPopup({
+          scopes: ["User.Read", "Mail.Read", "Calendars.Read"] // Add scopes as needed
+        });
+        console.log("Login successful:", loginResponse);
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline";
+        userInfoDiv.textContent = `Hello, ${loginResponse.account.username}`;
+        fetchEarnings();
+      } catch (error) {
+        console.error("Login failed:", error);
+        userInfoDiv.textContent = "Login failed: " + error.message;
+      }
+    };
+
+    logoutBtn.onclick = () => {
+      msalInstance.logoutPopup().then(() => {
+        loginBtn.style.display = "inline";
+        logoutBtn.style.display = "none";
+        userInfoDiv.textContent = "";
+        document.getElementById("earnings").innerHTML = "";
+      });
+    };
+
+    async function fetchEarnings() {
+      try {
+        const response = await fetch("/api/earnings", {
+          headers: {
+            Authorization: "Basic " + btoa("admin:securepassword"),
+          },
+        });
+        if (!response.ok) {
+          document.getElementById("earnings").innerText =
+            "Failed to load earnings data";
+          return;
+        }
+        const data = await response.json();
+        let html =
+          "<h2>Total Annual Revenue: $" +
+          data.totalAnnualRevenue.toLocaleString() +
+          "</h2>";
+        html +=
+          "<h3>Total Daily Revenue: $" + data.totalDailyRevenue.toFixed(2) + "</h3>";
+        html += "<ul>";
+        for (const [stream, details] of Object.entries(data.revenueStreams)) {
+          html +=
+            "<li>" +
+            stream +
+            ": $" +
+            details.amount.toLocaleString() +
+            " (Account: " +
+            (details.accountNumber || "N/A") +
+            ", Routing Number: " +
+            (details.routingNumber || "N/A") +
+            ")</li>";
+        }
+        html += "</ul>";
+        document.getElementById("earnings").innerHTML = html;
+      } catch (error) {
+        document.getElementById("earnings").innerText =
+          "Error fetching earnings data: " + error.message;
+      }
+    }
+
+    // Added NVIDIA link section
+    const nvidiaLink = document.createElement('div');
+    nvidiaLink.style.marginTop = '20px';
+    nvidiaLink.innerHTML = '<a href="https://www.nvidia.com/en-us/studio/laptops-desktops/" target="_blank" rel="noopener noreferrer">Explore NVIDIA Studio Laptops & Desktops</a>';
+    document.body.appendChild(nvidiaLink);
+  </script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 # Step-by-Step Guide to Configure Docker Desktop with WSL 2 Backend on Windows
 
-This guide will help you configure Docker Desktop to use the WSL 2 backend on Windows, enabling better integration and performance.
+This guide will help you configure Docker Desktop to use the WSL 2 backend on Windows,
+enabling better integration and performance.
 
 ---
 
@@ -54,7 +55,8 @@ This guide will help you configure Docker Desktop to use the WSL 2 backend on Wi
 1. Run the following command to start the Triton server container:
 
    ```bash
-   docker run --gpus=all --rm -d --name tritonserver -p 8000:8000 -p 8001:8001 -p 8002:8002 nvcr.io/nvidia/tritonserver:22.12-py3
+   docker run --gpus=all --rm -d --name tritonserver -p 8000:8000 -p 8001:8001 -p 8002:8002 \
+   nvcr.io/nvidia/tritonserver:22.12-py3
    ```
 
 2. Verify the container is running:
