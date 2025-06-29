@@ -8,15 +8,19 @@ This guide will help you configure Docker Desktop to use the WSL 2 backend on Wi
 
 1. Open PowerShell as Administrator.
 2. Run the command:
-   ```
+
+   ```bash
    wsl --list --verbose
    ```
+
 3. Ensure your Linux distributions are using version 2. If not, set the default version to 2:
-   ```
+
+   ```bash
    wsl --set-default-version 2
    ```
-4. If WSL is not installed, follow Microsoft’s guide to install WSL 2:
-   https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+4. If WSL is not installed, follow Microsoft’s guide to install WSL 2:  
+   [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
 ---
 
@@ -36,9 +40,11 @@ This guide will help you configure Docker Desktop to use the WSL 2 backend on Wi
 
 1. Open a new PowerShell or Command Prompt window.
 2. Run:
-   ```
+
+   ```bash
    docker version
    ```
+
 3. Confirm that both Client and Server sections show version information without errors.
 
 ---
@@ -46,11 +52,14 @@ This guide will help you configure Docker Desktop to use the WSL 2 backend on Wi
 ## Step 4: Run Triton Inference Server Container
 
 1. Run the following command to start the Triton server container:
-   ```
+
+   ```bash
    docker run --gpus=all --rm -d --name tritonserver -p 8000:8000 -p 8001:8001 -p 8002:8002 nvcr.io/nvidia/tritonserver:22.12-py3
    ```
+
 2. Verify the container is running:
-   ```
+
+   ```bash
    docker ps
    ```
 
@@ -59,9 +68,11 @@ This guide will help you configure Docker Desktop to use the WSL 2 backend on Wi
 ## Step 5: Run Critical Path Test Script
 
 1. Run the PowerShell critical path test script:
-   ```
+
+   ```powershell
    powershell -ExecutionPolicy Bypass -File qa/critical_path_test.ps1
    ```
+
 2. Confirm all tests pass successfully.
 
 ---
