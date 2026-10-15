@@ -1,0 +1,9 @@
+[submodule "external/OSCAR-BROOME-REVENUE"]
+	path = external/OSCAR-BROOME-REVENUE
+	url = https://github.com/OwlbanGroup/OSCAR-BROOME-REVENUE.git
+[submodule "external/dynamo"]
+	path = external/dynamo
+	url = https://github.com/OwlbanGroup/dynamo.git
+[submodule "external/owlbangroup.io"]
+	path = external/owlbangroup.io
+	url = https://github.com/OwlbanGroup/owlbangroup.io.git
